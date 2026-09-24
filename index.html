@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f5f2ea">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="Raijin Scans est temporairement indisponible. Retrouvez les informations sur l’incident et suivez les prochaines annonces sur notre Discord.">
+  <title>Raijin Scans — Indisponibilité temporaire</title>
+  <style>
+    /* Mobile first. No fonts, images, frameworks or other external dependencies. */
+    :root {
+      --paper: #f5f2ea;
+      --ink: #171717;
+      --muted: #55524c;
+      --white: #fffefa;
+      --line: 2px solid var(--ink);
+      --shadow: 6px 6px 0 var(--ink);
+      --page-width: 1280px;
+      --gutter: clamp(18px, 4vw, 56px);
+      --space: clamp(22px, 3vw, 38px);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: var(--ink);
+      color-scheme: light;
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    body, h1, h2, h3, p { margin: 0; }
+    button, a, summary { -webkit-tap-highlight-color: transparent; }
+    button { font: inherit; }
+    [hidden] { display: none !important; }
+    svg { display: block; flex-shrink: 0; }
+
+    body {
+      min-width: 0;
+      min-height: 100vh;
+      min-height: 100svh;
+      background: repeating-linear-gradient(-45deg, #f7f4ed 0 5px, #f2efe7 5px 10px);
+      line-height: 1.7;
+    }
+
+    ::selection { color: var(--white); background: var(--ink); }
+    :focus-visible { outline: 3px solid #11628e; outline-offset: 5px; }
+    .discord-panel :focus-visible { outline-color: #a4dfff; }
+
+    .page {
+      width: 100%;
+      max-width: calc(var(--page-width) + var(--gutter) * 2);
+      margin-inline: auto;
+      padding-top: max(clamp(30px, 5vw, 74px), env(safe-area-inset-top));
+      padding-bottom: max(32px, env(safe-area-inset-bottom));
+      padding-left: max(var(--gutter), env(safe-area-inset-left));
+      padding-right: max(var(--gutter), env(safe-area-inset-right));
+    }
+
+    /* Keep titles striking without long uppercase words overflowing a phone. */
+    .hero { text-align: center; margin-bottom: var(--space); }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      max-width: 100%;
+      margin-bottom: clamp(18px, 2.2vw, 26px);
+      padding: 7px 13px;
+      border: var(--line);
+      border-radius: 999px;
+      background: var(--white);
+      font-size: .75rem;
+      font-weight: 800;
+      letter-spacing: .065em;
+      line-height: 1.5;
+      text-transform: uppercase;
+    }
+    .badge-dot { width: 7px; height: 7px; flex: 0 0 7px; border-radius: 50%; background: var(--ink); }
+    h1 {
+      max-width: 1120px;
+      margin-inline: auto;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: clamp(1.85rem, calc(4.5vw + .45rem), 4.25rem);
+      font-weight: 900;
+      line-height: 1.06;
+      letter-spacing: -.048em;
+      text-transform: uppercase;
+      overflow-wrap: anywhere;
+    }
+    .title-lead { display: block; }
+    .title-emphasis {
+      display: inline-block;
+      max-width: 100%;
+      padding-bottom: .085em;
+      border-bottom: clamp(3px, .45vw, 5px) solid currentColor;
+    }
+    .subtitle {
+      max-width: 66ch;
+      margin: clamp(18px, 2.5vw, 26px) auto 0;
+      color: var(--muted);
+      font-size: clamp(.975rem, calc(.9rem + .22vw), 1.125rem);
+      line-height: 1.75;
+      text-wrap: pretty;
+    }
+    strong { color: var(--ink); font-weight: 750; }
+
+    /* Phones: Discord first, then the incident details. Wide screens: sidebar. */
+    .layout { display: grid; grid-template-areas: "community" "information"; gap: 26px; align-items: start; }
+    .layout > *, .latest > *, .redirect-top > * { min-width: 0; }
+    .information { grid-area: information; }
+    .panel { background: var(--white); border: var(--line); }
+    .incident { padding: clamp(20px, 3vw, 34px); box-shadow: var(--shadow); }
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 18px;
+      font-size: .875rem;
+      font-weight: 850;
+      line-height: 1.4;
+      letter-spacing: .045em;
+      text-transform: uppercase;
+    }
+    .section-label svg { width: 21px; height: 21px; }
+    .copy { color: var(--muted); font-size: clamp(1rem, calc(.95rem + .12vw), 1.0625rem); line-height: 1.8; }
+    .copy p + p { margin-top: 15px; }
+    .latest {
+      display: grid;
+      grid-template-columns: 30px minmax(0, 1fr);
+      gap: 12px;
+      margin-top: 24px;
+      padding: clamp(14px, 2vw, 20px);
+      border: var(--line);
+      background: #f1ede3;
+    }
+    .latest-icon {
+      display: grid;
+      place-items: center;
+      width: 30px;
+      height: 30px;
+      background: var(--ink);
+      color: white;
+    }
+    .latest h3 { font-size: .9375rem; line-height: 1.5; margin-bottom: 6px; }
+    .latest p { color: var(--muted); font-size: .9375rem; line-height: 1.75; }
+    .date-note { margin-top: 20px; color: var(--muted); font-size: .8125rem; line-height: 1.6; }
+
+    details { margin-top: 24px; }
+    summary {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      min-height: 60px;
+      padding: 17px 20px;
+      cursor: pointer;
+      list-style: none;
+      font-size: .875rem;
+      line-height: 1.55;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .035em;
+    }
+    summary::-webkit-details-marker { display: none; }
+    summary::marker { content: ""; }
+    .expand-icon { font-size: 1.5rem; font-weight: 500; line-height: 1; flex-shrink: 0; }
+    details[open] .expand-icon { transform: rotate(45deg); }
+    .details-body { padding: 0 20px 22px; font-size: .975rem; }
+    .details-body p + p { margin-top: 14px; }
+
+    /* High-contrast Discord card. No tiny tap targets or clipped countdowns. */
+    .discord-panel {
+      grid-area: community;
+      min-width: 0;
+      padding: clamp(20px, 2.8vw, 32px);
+      border: var(--line);
+      box-shadow: 6px 6px 0 #807b71;
+      background: var(--ink);
+      color: var(--white);
+    }
+    .discord-kicker {
+      margin-bottom: 7px;
+      color: #d2cec5;
+      font-size: .75rem;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+    .discord-panel h2 {
+      font-size: clamp(1.45rem, calc(1.15rem + .7vw), 1.85rem);
+      font-weight: 900;
+      line-height: 1.15;
+      letter-spacing: -.035em;
+      text-transform: uppercase;
+      overflow-wrap: anywhere;
+    }
+    .discord-copy { margin-top: 12px; color: #d2cec5; font-size: .9375rem; line-height: 1.7; }
+    .discord-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 11px;
+      width: 100%;
+      min-height: 56px;
+      margin-top: 22px;
+      padding: 14px 12px;
+      border: 2px solid var(--white);
+      box-shadow: 4px 4px 0 #6d6962;
+      background: var(--white);
+      color: var(--ink);
+      text-decoration: none;
+      font-size: .9375rem;
+      font-weight: 850;
+      line-height: 1.5;
+      text-align: center;
+      transition: transform 150ms ease, box-shadow 150ms ease;
+    }
+    .discord-button svg { width: 22px; height: 22px; }
+    .discord-button span { min-width: 0; overflow-wrap: anywhere; }
+
+    .redirect-box { margin-top: 24px; padding-top: 20px; border-top: 1px solid #57534d; }
+    .redirect-top { display: flex; align-items: center; justify-content: space-between; gap: 14px; }
+    .redirect-label { font-size: .875rem; font-weight: 750; line-height: 1.5; }
+    .timer {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 5px;
+      flex-shrink: 0;
+      white-space: nowrap;
+      font-size: 2rem;
+      font-weight: 850;
+      font-variant-numeric: tabular-nums;
+      line-height: 1.2;
+      letter-spacing: -.04em;
+    }
+    .timer-unit { color: #d2cec5; font-size: 1rem; font-weight: 500; letter-spacing: 0; }
+    progress {
+      display: block;
+      width: 100%;
+      height: 5px;
+      margin-top: 13px;
+      overflow: hidden;
+      border: 0;
+      border-radius: 0;
+      appearance: none;
+      -webkit-appearance: none;
+      background: #504c46;
+      color: var(--white);
+      accent-color: var(--white);
+    }
+    progress::-webkit-progress-bar { background: #504c46; }
+    progress::-webkit-progress-value { background: var(--white); }
+    progress::-moz-progress-bar { background: var(--white); }
+    .redirect-status { margin-top: 11px; color: #d2cec5; font-size: .8125rem; line-height: 1.65; }
+    .redirect-toggle {
+      display: block;
+      min-height: 48px;
+      width: 100%;
+      margin-top: 12px;
+      padding: 10px 12px;
+      border: 1px solid #777168;
+      border-radius: 0;
+      background: transparent;
+      color: var(--white);
+      font-size: .875rem;
+      font-weight: 650;
+      line-height: 1.5;
+      cursor: pointer;
+    }
+    .no-js { margin-top: 20px; color: #d2cec5; font-size: .875rem; }
+    footer { margin-top: 40px; color: var(--muted); font-size: .875rem; text-align: center; line-height: 1.8; }
+    footer span { display: block; }
+
+    @media (hover: hover) and (pointer: fine) {
+      .discord-button:hover { transform: translate(2px, 2px); box-shadow: 2px 2px 0 #6d6962; }
+      .redirect-toggle:hover { background: #2d2b27; border-color: #b1aba0; }
+      summary:hover { background: #f1ede3; }
+    }
+
+    /* Comfortable reading width on tablets, not a stretched single column. */
+    @media (min-width: 600px) and (max-width: 1023px) {
+      .layout { max-width: 740px; margin-inline: auto; }
+      .discord-panel { padding: 28px 32px; }
+      .discord-panel h2 { max-width: none; }
+    }
+
+    /* Desktop / ultrawide: constrained text column and a visible Discord sidebar. */
+    @media (min-width: 1024px) {
+      .layout {
+        grid-template-areas: "information community";
+        grid-template-columns: minmax(0, 1.55fr) minmax(330px, 1fr);
+        gap: clamp(28px, 3vw, 46px);
+      }
+      .discord-panel { position: sticky; top: 28px; }
+      .incident { box-shadow: 8px 8px 0 var(--ink); }
+      .hero { margin-bottom: 44px; }
+      footer { margin-top: 52px; }
+    }
+
+    /* Avoid a tall sticky panel on landscape phones / short browser windows. */
+    @media (max-height: 760px) { .discord-panel { position: static; } }
+    @media (max-width: 359px) {
+      .badge { font-size: .6875rem; padding-inline: 10px; }
+      .discord-panel, .incident { padding: 18px; }
+      .latest { grid-template-columns: minmax(0, 1fr); }
+      .latest-icon { display: none; }
+      .redirect-top { gap: 9px; }
+      .timer { font-size: 1.75rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { transition: none !important; animation: none !important; }
+    }
+    @media (forced-colors: active) {
+      .panel, .discord-panel, .latest, .discord-button, .redirect-toggle { border: 2px solid CanvasText; }
+      .discord-panel { color: CanvasText; background: Canvas; }
+    }
+    @media print {
+      body { background: white; }
+      .page { max-width: none; padding: 0; }
+      .layout { display: block; }
+      .discord-panel { display: none; }
+      .incident { box-shadow: none; break-inside: avoid; }
+      h1 { font-size: 30pt; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="hero">
+      <div class="badge"><span class="badge-dot" aria-hidden="true"></span>Incident infrastructure · Kyiv</div>
+      <h1><span class="title-lead">Raijin est temporairement</span><span class="title-emphasis">indisponible.</span></h1>
+      <p class="subtitle">Une partie essentielle de l’infrastructure de <strong>Raijin Scans</strong> est inaccessible à la suite des attaques à Kyiv. Notre priorité est la récupération des données et le retour du site.</p>
+    </header>
+
+    <div class="layout">
+      <!-- First on phones so readers see the redirect warning immediately. -->
+      <aside class="discord-panel" aria-labelledby="discord-title">
+        <p class="discord-kicker">Restons en contact</p>
+        <h2 id="discord-title">Les nouvelles,<br>sur Discord.</h2>
+        <p class="discord-copy">Suivez l’évolution de la situation et retrouvez toutes les annonces concernant le retour de Raijin Scans.</p>
+
+        <!-- Change this URL to change both the button and automatic redirect. -->
+        <a class="discord-button" id="discord-link" href="https://discord.com/invite/raijinscans">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+            <path d="M13.545 2.907a13.2 13.2 0 0 0-3.257-1.011.05.05 0 0 0-.052.025c-.141.25-.297.577-.406.833a12.2 12.2 0 0 0-3.658 0 8 8 0 0 0-.412-.833.05.05 0 0 0-.052-.025c-1.125.194-2.22.534-3.257 1.011a.04.04 0 0 0-.021.018C.356 6.024-.213 9.047.066 12.032q.003.022.021.037a13.3 13.3 0 0 0 3.995 2.02.05.05 0 0 0 .056-.019q.463-.63.818-1.329a.05.05 0 0 0-.01-.059l-.018-.011a9 9 0 0 1-1.248-.595.05.05 0 0 1-.02-.066l.015-.019q.127-.095.248-.195a.05.05 0 0 1 .051-.007c2.619 1.196 5.454 1.196 8.041 0a.05.05 0 0 1 .053.007q.121.1.248.195a.05.05 0 0 1-.004.085 8 8 0 0 1-1.249.594.05.05 0 0 0-.03.03.05.05 0 0 0 .003.041c.24.465.515.909.817 1.329a.05.05 0 0 0 .056.019 13.2 13.2 0 0 0 4.001-2.02.05.05 0 0 0 .021-.037c.334-3.451-.559-6.449-2.366-9.106a.03.03 0 0 0-.02-.019m-8.198 7.307c-.789 0-1.438-.724-1.438-1.612s.637-1.613 1.438-1.613c.807 0 1.45.73 1.438 1.613 0 .888-.637 1.612-1.438 1.612m5.316 0c-.788 0-1.438-.724-1.438-1.612s.637-1.613 1.438-1.613c.807 0 1.451.73 1.438 1.613 0 .888-.631 1.612-1.438 1.612"/>
+          </svg>
+          <span>Rejoindre le Discord</span>
+        </a>
+
+        <!-- Hidden until JS is running: no misleading countdown without JS. -->
+        <div class="redirect-box" id="redirect-box" hidden>
+          <div class="redirect-top">
+            <p class="redirect-label" id="redirect-label">Redirection<br>automatique</p>
+            <div class="timer" role="timer" aria-live="off" aria-label="Temps restant avant la redirection vers Discord">
+              <span id="countdown">30</span><span class="timer-unit">s</span>
+            </div>
+          </div>
+          <progress id="redirect-progress" max="30" value="30" aria-label="Temps restant avant la redirection vers Discord"></progress>
+          <p class="redirect-status" id="redirect-status" role="status" aria-live="polite">Vous serez automatiquement redirigé vers Discord. Vous pouvez annuler pour continuer votre lecture.</p>
+          <button class="redirect-toggle" id="redirect-toggle" type="button">Rester sur cette page</button>
+        </div>
+        <noscript><p class="no-js">La redirection automatique nécessite JavaScript. Utilisez le bouton ci-dessus pour rejoindre Discord.</p></noscript>
+      </aside>
+
+      <div class="information">
+        <section class="panel incident" aria-labelledby="incident-title">
+          <h2 class="section-label" id="incident-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false"><path d="M12 9v4m0 4h.01M10.3 3.8 2.5 17.3A2 2 0 0 0 4.2 20h15.6a2 2 0 0 0 1.7-2.7L13.7 3.8a2 2 0 0 0-3.4 0Z"/></svg>
+            Situation actuelle
+          </h2>
+          <div class="copy">
+            <p>L’incident affecte l’infrastructure utilisée pour <strong>nos images, notre base de données et plusieurs services essentiels</strong> au fonctionnement de Raijin Scans.</p>
+            <p>D’après le message de support de notre hébergeur relayé publiquement, les installations ont été directement touchées. L’accès physique n’est pas encore possible pour inspecter ou déplacer les équipements.</p>
+            <p><strong>Aucune date de retour ne peut encore être garantie.</strong> Nous espérons vous retrouver au plus vite et publierons les nouvelles informations sur Discord.</p>
+          </div>
+          <div class="latest">
+            <div class="latest-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 11v6m0-10v1"/></svg></div>
+            <div>
+              <h3>Une information à confirmer</h3>
+              <p>Selon ces premières informations, <strong>la majorité des serveurs dans les salles techniques auraient survécu</strong>. Cela ne confirme toutefois pas encore l’état de nos propres machines ni de leurs données.</p>
+            </div>
+          </div>
+          <p class="date-note">Point d’information du <time datetime="2026-09-24">24 septembre 2026</time> · Informations préliminaires.</p>
+        </section>
+
+        <details class="panel" id="incident-details">
+          <summary><span>Plus de détails sur la situation</span><span class="expand-icon" aria-hidden="true">+</span></summary>
+          <div class="copy details-body">
+            <p>Le message de support VSYS relayé publiquement indique que les deux centres de données à Kyiv où l’hébergeur dispose d’infrastructures ont été directement touchés.</p>
+            <p>Sans accès physique aux installations, ses équipes ne peuvent pas encore vérifier chaque serveur ni récupérer ou déplacer les équipements.</p>
+            <p>Les informations sur la survie de la majorité des serveurs restent préliminaires. Nous attendons une confirmation concernant nos propres équipements avant de pouvoir préciser les prochaines étapes.</p>
+            <p>Nous préférons donc ne pas annoncer un délai de rétablissement incertain. <strong>Les mises à jour et l’annonce du retour du site seront publiées sur Discord.</strong></p>
+          </div>
+        </details>
+      </div>
+    </div>
+    <footer>Merci pour votre patience et votre soutien.<span>— L’équipe Raijin Scans</span></footer>
+  </main>
+
+  <script>
+    (() => {
+      'use strict';
+
+      // SETTINGS: one duration, one destination (read from the actual button).
+      const REDIRECT_SECONDS = 30;
+      const discordLink = document.getElementById('discord-link');
+      const redirectURL = discordLink.href;
+      const box = document.getElementById('redirect-box');
+      const countdown = document.getElementById('countdown');
+      const progress = document.getElementById('redirect-progress');
+      const label = document.getElementById('redirect-label');
+      const status = document.getElementById('redirect-status');
+      const toggle = document.getElementById('redirect-toggle');
+      const details = document.getElementById('incident-details');
+      const durationMs = REDIRECT_SECONDS * 1000;
+
+      let remainingMs = durationMs;
+      let lastTick = performance.now();
+      let cancelled = false;
+      let navigating = false;
+      let paused = document.hidden || details.open;
+      let intervalId;
+      let previousStatus = '';
+
+      const isPaused = () => cancelled || document.hidden || details.open;
+
+      function render() {
+        const seconds = Math.max(0, Math.ceil(remainingMs / 1000));
+        if (countdown.textContent !== String(seconds)) countdown.textContent = String(seconds);
+        progress.value = remainingMs / 1000;
+
+        let message;
+        if (navigating) {
+          label.textContent = 'Redirection en cours';
+          message = 'Ouverture de Discord… Si la page ne change pas, utilisez le bouton « Rejoindre le Discord ».';
+        } else if (cancelled) {
+          label.textContent = 'Redirection désactivée';
+          message = 'Vous pouvez rester ici autant que nécessaire. Le bouton Discord reste disponible.';
+        } else if (details.open) {
+          label.textContent = 'Lecture en cours';
+          message = 'Le compte à rebours est en pause pendant votre lecture. Refermez les détails pour le reprendre.';
+        } else if (document.hidden) {
+          label.textContent = 'Redirection en pause';
+          message = 'Le compte à rebours reprendra lorsque vous reviendrez sur cet onglet.';
+        } else {
+          label.textContent = 'Redirection automatique';
+          message = 'Vous serez automatiquement redirigé vers Discord. Vous pouvez annuler pour continuer votre lecture.';
+        }
+
+        // Do not announce the timer on every tick to screen readers.
+        if (message !== previousStatus) {
+          status.textContent = message;
+          previousStatus = message;
+        }
+        toggle.textContent = cancelled ? `Relancer le compte à rebours (${REDIRECT_SECONDS} s)` : 'Rester sur cette page';
+      }
+
+      function navigateToDiscord() {
+        if (navigating) return;
+        navigating = true;
+        remainingMs = 0;
+        clearInterval(intervalId);
+        toggle.hidden = true;
+        render();
+        // Replace avoids sending readers back into the same automatic redirect.
+        window.location.replace(redirectURL);
+      }
+
+      function tick() {
+        const now = performance.now();
+        if (!paused && !navigating) remainingMs = Math.max(0, remainingMs - (now - lastTick));
+        lastTick = now;
+        render();
+        if (!paused && !navigating && remainingMs <= 0) navigateToDiscord();
+      }
+
+      function syncPauseState() {
+        // Account for elapsed time using the OLD state, then apply the new state.
+        const now = performance.now();
+        if (!paused && !navigating) remainingMs = Math.max(0, remainingMs - (now - lastTick));
+        lastTick = now;
+        paused = isPaused();
+        render();
+      }
+
+      toggle.addEventListener('click', () => {
+        if (navigating) return;
+        if (cancelled) {
+          remainingMs = durationMs;
+          lastTick = performance.now();
+          cancelled = false;
+        } else {
+          cancelled = true;
+        }
+        syncPauseState();
+      });
+      details.addEventListener('toggle', syncPauseState);
+      document.addEventListener('visibilitychange', syncPauseState);
+      window.addEventListener('pageshow', () => {
+        lastTick = performance.now();
+        paused = isPaused();
+        render();
+      });
+      progress.max = REDIRECT_SECONDS;
+      box.hidden = false;
+      render();
+      intervalId = window.setInterval(tick, 100);
+    })();
+  </script>
+</body>
+</html>
